@@ -1,12 +1,12 @@
 {
-  "name": "videoinfo",
+  "name": "servicetool",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sending JSON file to backend",
   "main": "index.js",
   "scripts": {
     "electron": "electron ."
   },
-  "author": "",
+  "author": "NE Device SW",
   "license": "ISC",
   "dependencies": {
     "electron": "^3.0.10",
