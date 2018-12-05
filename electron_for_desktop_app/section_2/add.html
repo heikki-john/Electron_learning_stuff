@@ -13,11 +13,15 @@
     <h1 id="result"></h1>
 
     <script>
+      const electron = require('electron');
+      const { ipcRenderer } = electron;
 
       document.querySelector('form').addEventListener('submit', (event) => {
         event.preventDefault();
         
-        debugger;
+        const { value } = document.querySelector('input');
+        console.log(value);
+        ipcRenderer.send('todoAdd', value);
       });
 
     </script>

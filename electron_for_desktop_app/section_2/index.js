@@ -25,8 +25,15 @@ function createAddWindow(){
   });
 
   addWindow.loadURL(`file://${__dirname}/add.html`);
+  addWindow.on('closed', () => addWindow = null )
 
 }
+
+ipcMain.on('todoAdd', (event, todo) => {
+  mainWindow.webContents.send('todoAdd', todo);
+  addWindow.close();
+});
+
 
 const menuTemplate = [
   {
@@ -35,6 +42,12 @@ const menuTemplate = [
       { 
         label: 'Add file',
         click() { createAddWindow() }
+      },
+      {
+        label: 'Clear list',
+        click() { 
+          mainWindow.webContents.send('todoClear');
+        }
       },
       { 
         label: 'Quit',
@@ -56,6 +69,7 @@ if (process.env.NODE_ENV !== 'production'){
   menuTemplate.push({
     label: 'View',
     submenu: [
+      { role: 'reload' },
       {
         label: 'Toggle developer tool',
         accelerator: process.platform === 'darwin' ? 'Command+Alt+I': 'Ctrl+Shift+I',
